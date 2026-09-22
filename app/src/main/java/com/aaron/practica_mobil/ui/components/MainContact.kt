@@ -1,5 +1,6 @@
 package com.aaron.practica_mobil.ui.components
 
+import android.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,8 +12,11 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun MainContact (){
@@ -21,7 +25,10 @@ fun MainContact (){
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {
-        Text("Mis Contactos")
+        Text(text = "Mis Contactos",
+            color = Color(0xFFFF0000),
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold)
         Row() {
             Text("Cuadro de Buscar")
             Text("Boton")
