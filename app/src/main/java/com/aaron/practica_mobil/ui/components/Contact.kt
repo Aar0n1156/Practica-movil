@@ -20,7 +20,7 @@ fun Contact (contact: String = "Inserte titulo", tel: String,
 ){
 
     Row(modifier = Modifier
-        .fillMaxSize()
+        .fillMaxWidth()
         .padding(16.dp),
         Arrangement.SpaceBetween,
         Alignment.CenterVertically) {

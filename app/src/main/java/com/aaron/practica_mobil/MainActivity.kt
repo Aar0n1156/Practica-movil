@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.aaron.practica_mobil.ui.components.Contact
 import com.aaron.practica_mobil.ui.components.ContactPreview
+import com.aaron.practica_mobil.ui.components.MainContact
 import com.aaron.practica_mobil.ui.components.Title
 import com.aaron.practica_mobil.ui.theme.Practica_MobilTheme
 
@@ -36,7 +37,7 @@ class MainActivity : ComponentActivity() {
                     ) {
 
                     }
-                    Contact("Aaron Javier Arce Barrera","6131403378")
+                    MainContact()
 
                 }
             }
