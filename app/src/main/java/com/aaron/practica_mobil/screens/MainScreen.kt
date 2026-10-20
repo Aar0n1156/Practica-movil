@@ -23,7 +23,7 @@ fun MainScreen(navController: NavController){
         Arrangement.SpaceBetween,
         Alignment.CenterVertically) {
         Text(
-            text = "Ola"
+            text = "Kiubo"
         )
     }
 }

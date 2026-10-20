@@ -54,4 +54,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    val nav_version = "2.9.7"
+    val coil_version = "2.6.0"
+    // Jetpack Compose integration
+    implementation("androidx.navigation:navigation-compose:${nav_version}")
+    implementation("io.coil-kt:coil-compose:${coil_version}")
 }
