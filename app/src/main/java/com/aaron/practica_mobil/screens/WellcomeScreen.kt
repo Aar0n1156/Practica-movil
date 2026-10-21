@@ -15,8 +15,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.aaron.practica_mobil.ui.theme.Practica_MobilTheme
@@ -31,14 +35,27 @@ fun WellcomeScreen(navController: NavController){
         Alignment.CenterHorizontally) {
 
         Image(
-            painter = painterResource(id = R.drawable.perfil),
+            painter = painterResource(id = R.drawable.perfil2),
             contentDescription = "Foto de perfil",
             modifier = Modifier.size(150.dp)
         )
 
-       Column { Text(
-           text = "Pantalla de Bienvenida"
-       )
+       Column (modifier = Modifier
+           .fillMaxSize()
+           .padding(16.dp),
+           Arrangement.Top,
+           Alignment.CenterHorizontally) {
+           Text(text = "Bienvenido",
+               textAlign = TextAlign.Center,
+               fontStyle = FontStyle.Normal,
+               fontFamily = FontFamily.Cursive,
+               fontSize = 32.sp
+           )
+
+           Text(
+           text = "Inicie sesion o Cree una nueva cuenta",
+               textAlign = TextAlign.Center
+           )
 
 
            Button(
@@ -51,8 +68,23 @@ fun WellcomeScreen(navController: NavController){
                    contentColor = Color.White
                )
            ) {
-               Text("Pantalla de Registro")
-           } }
+               Text("Crear cuenta")
+           }
+
+           Button(
+               onClick = {
+                   navController.navigate("login")
+               },
+               enabled = true,
+               colors = ButtonDefaults.buttonColors(
+                   containerColor = Color(0xFF4CAF50),
+                   contentColor = Color.White
+               )
+           ) {
+               Text("Iniciar Sesion")
+           }
+
+       }
     }
 }
 
