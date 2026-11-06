@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.aaron.practica_mobil.screens.LoginScreen
 import com.aaron.practica_mobil.screens.MainScreen
+import com.aaron.practica_mobil.screens.PermissionScreen
 import com.aaron.practica_mobil.screens.SignUpScreen
 import com.aaron.practica_mobil.screens.WellcomeScreen
 
@@ -28,6 +29,9 @@ fun AppNavigation() {
         }
         composable ("main"){
             MainScreen(navController)
+        }
+        composable ("permission"){
+            PermissionScreen(navController)
         }
     }
 }

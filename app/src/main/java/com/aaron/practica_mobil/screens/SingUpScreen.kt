@@ -36,6 +36,8 @@ fun SignUpScreen(navController: NavController){
 
     var nombre by remember { mutableStateOf("") }
     var pass by remember { mutableStateOf("") }
+    var passconf by remember { mutableStateOf("") }
+    var tel by remember { mutableStateOf("") }
     var mail by remember { mutableStateOf("") }
     var mailError by remember { mutableStateOf(false) }
 
@@ -81,20 +83,24 @@ fun SignUpScreen(navController: NavController){
                 unfocusedContainerColor = Color.Transparent
             ),
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Text
+                keyboardType = KeyboardType.Email
             )
         )
 
         TextField(
-            value = "",
-            onValueChange = { },
+            value = tel,
+            onValueChange = {newValue ->
+                if (newValue.all { it.isDigit() }) {
+                    tel = newValue
+                }
+            },
             label = {Text("Telefono")},
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent
             ),
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Phone
+                keyboardType = KeyboardType.Number
             )
         )
 
@@ -112,8 +118,8 @@ fun SignUpScreen(navController: NavController){
         )
 
         TextField(
-            value = "",
-            onValueChange = {},
+            value = passconf,
+            onValueChange = {passconf = it},
             label = {Text("Confirmar Contraseña")},
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
@@ -133,7 +139,7 @@ fun SignUpScreen(navController: NavController){
                 },
                 enabled = true,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF4CAF50),
+                    containerColor = Color(0xFFC62828),
                     contentColor = Color.White
                 )
             ) {

@@ -90,7 +90,7 @@ fun LoginScreen(navController: NavController){
                 },
                 enabled = true,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF4CAF50),
+                    containerColor = Color(0xFFC62828),
                     contentColor = Color.White
                 )
             ) {
@@ -124,7 +124,7 @@ fun LoginScreen(navController: NavController){
             },
             enabled = true,
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF4CAF50),
+                containerColor = Color(0xFF00695C),
                 contentColor = Color.White
             )
         ) {

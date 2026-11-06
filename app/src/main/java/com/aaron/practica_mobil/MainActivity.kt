@@ -18,6 +18,8 @@ import com.aaron.practica_mobil.navegation.AppNavigation
 import com.aaron.practica_mobil.ui.theme.Practica_MobilTheme
 
 class MainActivity : ComponentActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
