@@ -58,4 +58,14 @@ dependencies {
     val nav_version = "2.9.7"
     // Jetpack Compose integration
     implementation("androidx.navigation:navigation-compose:${nav_version}")
+
+    // Retrofit para peticiones HTTP
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+// Coil para cargar imágenes en Compose
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
+// ViewModel para Compose
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
 }
