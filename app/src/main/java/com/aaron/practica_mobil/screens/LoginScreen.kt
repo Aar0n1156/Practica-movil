@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,6 +42,9 @@ fun LoginScreen(navController: NavController){
     fun ValidEmail (email: String): Boolean{
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
+    val passValida = pass.length >= 8 // o pass.isNotEmpty()
+    val correoListo = mail.trim().isNotEmpty() && ValidEmail(mail.trim())
+    val puedeContinuar = correoListo && passValida
 
     Column(modifier = Modifier
         .fillMaxWidth()
@@ -57,15 +61,22 @@ fun LoginScreen(navController: NavController){
             value = mail,
             onValueChange = {
                 mail = it
-                mailError = !ValidEmail(it)},
+                val limpio = it.trim()
+                mailError = limpio.isNotEmpty() && !ValidEmail(limpio)
+            },
             label = {Text("Correo")},
             isError = mailError,
+            supportingText = {
+                if(mailError){
+                    Text("Ingresa un correo válido")
+                }
+            },
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent
             ),
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Text
+                keyboardType = KeyboardType.Email
             )
         )
 
@@ -73,6 +84,13 @@ fun LoginScreen(navController: NavController){
             value = pass,
             onValueChange = {pass = it},
             label = {Text("Contraseña")},
+            visualTransformation = PasswordVisualTransformation(),
+            isError = pass.isNotEmpty() && !passValida,
+            supportingText = {
+                if (pass.isNotEmpty() && !passValida){
+                    Text("Mínimo 8 caracteres")
+                }
+            },
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent
@@ -101,7 +119,7 @@ fun LoginScreen(navController: NavController){
                 onClick = {
                     navController.navigate("main")
                 },
-                enabled = true,
+                enabled = puedeContinuar,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF4CAF50),
                     contentColor = Color.White
