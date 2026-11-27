@@ -1,28 +1,15 @@
 package com.aaron.practica_mobil.screens
 
-import android.adservices.adid.AdId
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.LibraryMusic
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -35,12 +22,13 @@ import com.aaron.practica_mobil.ui.theme.Practica_MobilTheme
 @Composable
 fun MainScreen(
     navController: NavController,
-    featuredSong: List<Song> = sampleSong.take(2),
-    recentSongs : List<Song> = sampleSong,
+    featuredSongs: List<Song> = sampleSong.take(2),
+    recentSongs: List<Song> = sampleSong,
     currentSongId: Int? = null,
+    onSongSelected: (Song) -> Unit = {},
     modifier: Modifier = Modifier
-){
-    val activeSong = (featuredSong + recentSongs).find { it.id == currentSongId }
+) {
+    val activeSong = (featuredSongs + recentSongs).find { it.id == currentSongId }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -72,14 +60,73 @@ fun MainScreen(
                 }
             }
         }
-    ){ innerPadding ->
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(vertical = 16.dp)
-        ) { }
+                .padding(vertical = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Destacadas",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
+                )
+                TextButton(onClick = { navController.navigate("song_list") }) {
+                    Text("Ver todas")
+                }
+            }
 
+            LazyRow(
+                contentPadding = PaddingValues(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                items(featuredSongs, key = { it.id }) { song ->
+                    SongBox(
+                        song = song,
+                        isPlaying = song.id == currentSongId,
+                        onClick = {
+                            onSongSelected(song)
+                            navController.navigate("player/${song.id}")
+                        },
+                        modifier = Modifier.width(280.dp)
+                    )
+                }
+            }
+
+            Text(
+                text = "Escuchadas recientemente",
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                recentSongs.forEach { song ->
+                    SongBox(
+                        song = song,
+                        isPlaying = song.id == currentSongId,
+                        onClick = {
+                            onSongSelected(song)
+                            navController.navigate("player/${song.id}")
+                        }
+                    )
+                }
+            }
+        }
     }
 }
 
